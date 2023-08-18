@@ -1,10 +1,10 @@
 import './styles.scss';
-
+import React, { useEffect, useState } from 'react';
+import paypal from 'paypal-rest-sdk'; // Importando a biblioteca do PayPal
 import PageHeader from './layout/PageHeader';
 import PageTitle from './layout/PageTitle';
 import Summary from './Summary';
 import TableRow from './TableRow';
-import { useEffect, useState } from 'react';
 
 import { api } from './provider';
 import axios from 'axios';
@@ -15,7 +15,6 @@ function randomNumber(min, max) {
 
 function App() {
   const [cart, setCart] = useState([]);
-
   const productObject = {
     name: 'produto',
     category: 'categoria',
@@ -24,7 +23,6 @@ function App() {
   };
 
   const fetchData = () => {
-    console.log('fetch data');
     api.get('/cart').then((response) => setCart(response.data));
   };
 
@@ -33,31 +31,18 @@ function App() {
   }, []);
 
   const handleAddItem = () => {
-    // Insert
-
-    console.log('disparou handleAddItem');
-
-    api.post('/cart', productObject).then((response) => {
-      console.log(response);
+    api.post('/cart', productObject).then(() => {
       fetchData();
     });
   };
 
   const handleRemoveItem = (item) => {
-    // Remove
-
-    console.log('disparou handleRemoveItem');
-    console.log({ item });
-
-    api.delete(`/cart/${item._id}`).then((response) => {
-      console.log(response);
+    api.delete(`/cart/${item._id}`).then(() => {
       fetchData();
     });
   };
 
   const handleUpdateItem = (item, action) => {
-    // Quantity
-
     let newQuantity = item.quantity;
 
     if (action === 'decrease') {
@@ -73,9 +58,7 @@ function App() {
     const newData = { ...item, quantity: newQuantity };
     delete newData._id;
 
-    console.log({ newData });
-    api.put(`/cart/${item._id}`, newData).then((response) => {
-      console.log({ response });
+    api.put(`/cart/${item._id}`, newData).then(() => {
       fetchData();
     });
   };
@@ -91,6 +74,38 @@ function App() {
   };
 
   const cartTotal = getTotal();
+
+  // Função de integração com o PayPal
+  const handleCheckout = async () => {
+    try {
+      const paypalOrder = await paypal.payment.create({
+        intent: 'sale',
+        payer: {
+          payment_method: 'paypal',
+        },
+        transactions: [
+          {
+            amount: {
+              total: cartTotal.toFixed(2), // Arredondado para 2 casas decimais
+              currency: 'USD',
+            },
+          },
+        ],
+        redirect_urls: {
+          return_url: 'URL_DE_RETORNO', // Sua URL de retorno após o pagamento
+          cancel_url: 'URL_DE_CANCELAMENTO', // Sua URL de cancelamento
+        },
+      });
+
+      const response = await api.post('/paypal/orders', {
+        paypalOrderId: paypalOrder.id,
+      });
+
+      window.location.href = response.data.approval_url;
+    } catch (error) {
+      console.error('Erro ao criar ordem de pagamento do PayPal:', error);
+    }
+  };
 
   return (
     <>
@@ -136,6 +151,8 @@ function App() {
           </section>
           <aside>
             <Summary total={cartTotal} />
+            {/* Botão de Finalizar Compra */}
+            <button onClick={handleCheckout}>Finalizar Compra</button>
           </aside>
         </div>
       </main>
