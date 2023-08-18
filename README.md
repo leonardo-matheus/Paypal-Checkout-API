@@ -39,7 +39,7 @@ Este método cria uma ordem de compra utilizando a API do PayPal. Ele envia os d
 
 ## Prévia
 
-Você pode conferir uma prévia do projeto [aqui](paypal.d3f4lt.com.br).
+Você pode conferir uma prévia do projeto <a href="https://paypal.d3f4lt.com.br/" target="_blank">aqui.</a>
 
 ## Observações
 
