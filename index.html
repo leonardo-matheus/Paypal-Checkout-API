@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout with Paypal</title>
+    <link rel="icon" href="./img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <section class="container">
+        <div class="content">
+            <!-- Left Card -->
+            <div class="leftCard">
+                <div class="logo">
+                    <img class="logo-image" src="./img/logo.png" alt="logo">
+                </div>
+                <div class="order">
+                    <h2 class="order-title">Order Summary</h2>
+                    <div class="order-items">
+                        <div class="order-item">
+                            <div class="order-item-image">
+                                <img src="./img/product-1.png" alt="product">
+                            </div>
+                            <div class="order-item-info">
+                                <h5>Camiseta PP on Heart</h5>
+                                <h6>Quantity: 1</h6>
+                                <h6>Size: M</h6>
+                                <h6>Total: $20.00</h6>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="order-item-image">
+                                <img src="./img/product-2.png" alt="product">
+                            </div>
+                            <div class="order-item-info">
+                                <h5>Camiseta Paypal Logo</h5>
+                                <h6>Quantity: 1</h6>
+                                <h6>Size: P</h6>
+                                <h6>Total: $10.00</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="total">
+                    <h2 class="total-title">Total bill</h2>
+                    <h2 class="total-price" id="total-price">$30.00</h2>
+                </div>
+            </div>
+
+            <!-- Right Card -->
+            <div class="rightCard">
+                <div class="form-block">
+                    <h3 class="titleForm">Complete your order</h3>
+                    <form class="form" action="paypal-api.php" method="post">
+
+                        <h4>Personal Details</h4>
+                        <div class="form-name">
+                            <div class="form-name-item" id="personal_info">
+                                <div class="box-input-form">                                
+                                    <label for="first-name">First Name:</label>
+                                    <input type="text" class="form-control" id="first-name" name="first-name-input">
+                                    <label for="last-name">Last Name:</label>
+                                    <input type="text" class="form-control" id="last-name" name="last-name-input"></div>
+                                <br>
+                                <div class="box-input-form">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="email" name="email-input">
+                                    <label for="phone">Phone:</label>
+                                    <input type="text" class="form-control" id="phone" name="phone-input">
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <input type="hidden" name="products[]" value='{"name": "Camiseta PP on Heart", "price": "20.00"}'>
+                        <input type="hidden" name="products[]" value='{"name": "Camiseta Paypal Logo", "price": "10.00"}'>
+
+                        <input type="hidden" name="total" value="30.00">
+                        <input type="hidden" name="postal-code" value="159978">
+
+                        <h4>Shipping Address</h4>
+                        <div class="form-name-ship">
+                            <div class="form-name-item-ship" id="shipping_info">
+                                <div class="box-input-form">
+                                    <label for="address">Address:</label>
+                                    <input type="text" class="form-control" id="address" name="address-input">
+                                </div>
+                                <div class="box-input-form-ship">
+                                    <label for="city">City:</label>
+                                    <input type="text" class="form-control" id="city" name="city-input">
+                                    <label for="state">State:</label>
+                                    <input type="text" class="form-control" id="state" name="state-input">
+                                    <label for="postal-code">Postal Code:</label>
+                                    <input type="text" class="form-control" id="postal-code" name="postal-code-input">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botão de envio -->
+                        <button type="submit" class="btn">Pay</button>
+                    </form>
+
+                    <div class="payment-button">
+                        <div submit id="paypal-button-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
