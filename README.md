@@ -1,54 +1,54 @@
 # PayPal Checkout Integration 
 
-Este é um projeto de integração com o PayPal Checkout para o teste fornecido pela empresa Robert Half. O projeto permite que os clientes façam compras online e realizem pagamentos usando a API do PayPal.
+This is a project for integrating PayPal Checkout for the test provided by the Robert Half company. The project allows customers to make online purchases and payments using the PayPal API.
 
-## Descrição
+## Description
 
-O projeto consiste em uma aplicação web que permite aos clientes selecionar produtos da Mobile World Store, preencher informações pessoais e de envio, e finalizar a compra utilizando o PayPal Checkout.
+The project consists of a web application that allows customers to select products from the Mobile World Store, fill in personal and shipping information, and complete the purchase using PayPal Checkout.
 
-## Funcionalidades
+## Features
 
-- Exibição de produtos da loja.
-- Formulário para preenchimento de informações pessoais e de envio.
-- Integração com a API do PayPal para processamento de pagamentos.
+- Display of products from the store.
+- Form for filling in personal and shipping information.
+- Integration with the PayPal API for payment processing.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
 - HTML
 - CSS
 - JavaScript
 - PHP
 
-## Métodos PHP Utilizados
+## PHP Methods Used
 
 ### `generateAccessToken($clientId, $clientSecret)`
 
-Este método é responsável por gerar o token de acesso para a API do PayPal, necessário para fazer solicitações à API.
+This method is responsible for generating the access token for the PayPal API, required for making requests to the API.
 
 ### `createOrder($accessToken, $postData)`
 
-Este método cria uma ordem de compra utilizando a API do PayPal. Ele envia os dados da compra e do cliente para o PayPal e retorna a URL de aprovação da compra.
+This method creates a purchase order using the PayPal API. It sends the purchase and customer data to PayPal and returns the approval URL for the purchase.
 
-## Instruções de Uso
+## Usage Instructions
 
-1. Clone o repositório para o seu ambiente de desenvolvimento.
-2. Configure as chaves do cliente (`$clientId` e `$clientSecret`) no arquivo `index.php`.
-3. Certifique-se de que as configurações de ambiente (sandbox ou produção) estão corretas.
-4. Execute o servidor PHP (ex: `php -S localhost:8000`).
-5. Acesse a aplicação no seu navegador (ex: `http://localhost:8000`).
+1. Clone the repository to your development environment.
+2. Configure the client keys (`$clientId` and `$clientSecret`) in the `index.php` file.
+3. Make sure the environment settings (sandbox or production) are correct.
+4. Run the PHP server (e.g., `php -S localhost:8000`).
+5. Access the application in your browser (e.g., `http://localhost:8000`).
 
-## Prévia
+## Preview
 
-Você pode conferir uma prévia do projeto <a href="https://paypal.d3f4lt.com.br/" target="_blank">aqui.</a>
+You can check out a preview of the project <a href="https://paypal.d3f4lt.com.br/" target="_blank">here.</a>
 
-## Observações
+## Notes
 
-Certifique-se de configurar as URLs de redirecionamento no painel de configurações do PayPal para que os redirecionamentos após a compra funcionem corretamente.
+Be sure to configure the redirection URLs in the PayPal settings panel to ensure that post-purchase redirections work correctly.
 
-## Autor
+## Author
 
 Leonardo Matheus da Silva
 
-## Licença
+## License
 
-Este projeto está licenciado sob a Licença MIT
+This project is licensed under the MIT License.
